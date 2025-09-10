@@ -1,9 +1,17 @@
+package api;
+import boards.TicTacToeBoard;
+import game.Board;
+import game.GameResult;
+import game.Move;
+import game.Player;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
+public class GameEngine {
 
-    }
+    /*
+    * APIs are endpoint that other deveopers can use to interact with your system
+    * */
 
     public Board start() {
         return  new Board();
@@ -14,7 +22,7 @@ public class Main {
     }
 
     public GameResult isComplete(Board board) {
-        if (board instanceof  TicTacToeBoard) {
+        if (board instanceof TicTacToeBoard) {
             TicTacToeBoard board1 = (TicTacToeBoard) board;
 
             // check all rows
@@ -23,9 +31,9 @@ public class Main {
             for (int i = 0; i < 3; i++) {
                 rowComplete = true;
                 // have to learn this syntax sometime
-                firstCharacter = board1.cells[i][0];
+                firstCharacter = board1.getCell[i][0];
                 for (int j = 0; j < 3; j ++ ) {
-                    if (!board1.cells[i][j].equals(firstCharacter)) {
+                    if (!board1.getCell[i][j].equals(firstCharacter)) {
                         rowComplete = false;
                         break;
                     }
@@ -41,9 +49,9 @@ public class Main {
             for (int i = 0; i < 3; i ++) {
                 colComplete = true;
                 // have to learn this syntax sometime
-                firstCharacter = board1.cells[0][i];
+                firstCharacter = board1.getCell[0][i];
                 for (int j = 0; j < 3; j ++ ) {
-                    if (!board1.cells[j][i].equals(firstCharacter)) {
+                    if (!board1.getCell[j][i].equals(firstCharacter)) {
                         colComplete = false;
                         break;
                     }
@@ -58,9 +66,9 @@ public class Main {
             boolean diagComplete = true;
             for (int i = 0; i< 3; i++) {
                 diagComplete = true;
-                firstCharacter = board1.cells[0][0];
+                firstCharacter = board1.getCell[0][0];
 
-                if (!board1.cells[i][i].equals(firstCharacter)) {
+                if (!board1.getCell[i][i].equals(firstCharacter)) {
                     diagComplete = false;
                     break;
                 }
@@ -73,9 +81,9 @@ public class Main {
             // check rever diagonal
             boolean reverseDiaginal = true;
             for (int i = 0; i < 3; i++) {
-                firstCharacter = board1.cells[2][2];
+                firstCharacter = board1.getCell[2][2];
                 reverseDiaginal = true;
-                if (!board1.cells[i][2 - i].equals(firstCharacter)) {
+                if (!board1.getCell[i][2 - i].equals(firstCharacter)) {
                     reverseDiaginal = false;
                     break;
                 }
@@ -91,7 +99,7 @@ public class Main {
 
             for (int i = 0; i < 3; i++) {
                 for (int j = 1; j < 3; j++) {
-                    if (board1.cells[j][i] != null) {
+                    if (board1.getCell[j][i] != null) {
                         countOfFilledCells++;
                     }
                 }
@@ -109,34 +117,3 @@ public class Main {
 }
 
 
-class Board {
-
-}
-
-class TicTacToeBoard extends  Board {
-    String cells[][] = new String[3][3];
-}
-
-class Player {
-
-}
-
-class Game {
-
-}
-
-class Move {
-
-}
-
-class GameResult {
-    boolean isOver;
-    String winner;
-
-    // contructor name must match class name
-    // it can't have return type like void
-    public  GameResult(boolean isOver, String winner) {
-        this.isOver = isOver;
-        this.winner = winner;
-    }
-}
